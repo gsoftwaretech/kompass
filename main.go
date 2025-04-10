@@ -13,5 +13,7 @@ var WINDOW = APPLICATION.NewWindow("Kompass - Job Application Writing Tool")
 
 func main() {
     WINDOW.Resize(fyne.NewSize(700, 350))
+	WINDOW.SetFixedSize(true)
+
     WINDOW.ShowAndRun()
 }
