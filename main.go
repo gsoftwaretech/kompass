@@ -9,7 +9,10 @@ import (
 )
 
 var APPLICATION = app.NewWithID("kompass")
-var WINDOW = APPLICATION.NewWindow("Kompass - Job Application Writing Tool")
+var WINDOW 		= APPLICATION.NewWindow("Kompass - Job Application Writing Tool")
+int WPM         = 40  // Default general WPM
+int delay       = 500 // Default delay of 500ms 
+string text     = "" // Text to be written
 
 func main() {
     WINDOW.Resize(fyne.NewSize(700, 350))
