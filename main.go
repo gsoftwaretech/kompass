@@ -1,12 +1,12 @@
 package main
 
 import (
-    "fmt"
     "fyne.io/fyne/v2"
     "fyne.io/fyne/v2/app"
     "fyne.io/fyne/v2/widget"
     "fyne.io/fyne/v2/container"
     "fyne.io/fyne/v2/layout"
+	"github.com/go-toast/toast"
 )
 
 var APPLICATION = app.NewWithID("kompass")
@@ -29,8 +29,16 @@ func main() {
     iDelayInMs.Resize(fyne.NewSize(200, iDelayInMs.MinSize().Height)) // Set custom width
 
     bSubmit := widget.NewButton("Write", func() {
-        fmt.Println("Submit button clicked")
-    })
+		// Write text then send notificaiton
+
+		notification := toast.Notification{
+			AppID:   "Kompass",
+			Title:   "Kompass Notification",
+			Message: "Writing complete",
+		}
+
+		notification.Push()
+	})
 
     lCenter := container.NewMax(iText)
     lBottom := container.NewHBox(
