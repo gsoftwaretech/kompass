@@ -1,23 +1,52 @@
 package main
 
 import (
-    // "github.com/go-vgo/robotgo"
+    "fmt"
     "fyne.io/fyne/v2"
     "fyne.io/fyne/v2/app"
-    // "fyne.io/fyne/v2/widget"
-    // "fyne.io/fyne/v2/container"
-	// "time"
+    "fyne.io/fyne/v2/widget"
+    "fyne.io/fyne/v2/container"
+    "fyne.io/fyne/v2/layout"
 )
 
 var APPLICATION = app.NewWithID("kompass")
-var WINDOW 		= APPLICATION.NewWindow("Kompass - Job Application Writing Tool")
-var WPM         = 40  // Default general WPM
-var delay       = 500 // Default delay of 500ms 
-var text     	= "" // Text to be written
+var WINDOW = APPLICATION.NewWindow("Kompass - Job Application Writing Tool")
+var DelayInMs = 250 // Default delay in milliseconds per character
+var text = ""       // Text to be written
 
 func main() {
     WINDOW.Resize(fyne.NewSize(700, 350))
-	WINDOW.SetFixedSize(true)
+    WINDOW.SetFixedSize(true)
 
+    iText := widget.NewMultiLineEntry()
+    iText.Wrapping = fyne.TextWrapWord
+    iText.SetPlaceHolder("Enter your text to write here...")
+
+    iDelayInMs := widget.NewEntry()
+    iDelayInMs.SetPlaceHolder("Enter delay in ms")
+
+    iDelayContainer := container.NewWithoutLayout(iDelayInMs)
+    iDelayInMs.Resize(fyne.NewSize(200, iDelayInMs.MinSize().Height)) // Set custom width
+
+    bSubmit := widget.NewButton("Write", func() {
+        fmt.Println("Submit button clicked")
+    })
+
+    lCenter := container.NewMax(iText)
+    lBottom := container.NewHBox(
+        widget.NewLabel("Delay per character (ms):"),
+        iDelayContainer,
+        layout.NewSpacer(),
+        bSubmit,
+    )
+    content := container.NewBorder(
+        nil,
+        lBottom,
+        nil,
+        nil,
+        lCenter,
+    )
+
+    WINDOW.SetContent(content)
     WINDOW.ShowAndRun()
 }
