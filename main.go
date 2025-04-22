@@ -10,7 +10,7 @@ import (
 )
 
 var APPLICATION = app.NewWithID("kompass")
-var WINDOW = APPLICATION.NewWindow("Kompass - Job Application Writing Tool")
+var WINDOW = APPLICATION.NewWindow("Kompass - Writing Tool")
 var DelayInMs = 250 // Default delay in milliseconds per character
 var text = ""       // Text to be written
 
