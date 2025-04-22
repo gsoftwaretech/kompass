@@ -91,7 +91,7 @@ func main() {
     lCenter := container.NewMax(iText)
     lBottom := container.NewHBox(
         widget.NewLabel("Delay (ms):"),
-        iDelayContainer, // Wrap iDelayContainer in a VBox to ensure proper alignment
+        iDelayContainer,
         layout.NewSpacer(),
         widget.NewLabel("Display Notification:"),
         iNotificationCheck,
