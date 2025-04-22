@@ -27,7 +27,12 @@ func main() {
     iDelayInMs.SetPlaceHolder("Enter delay in ms")
 
     iDelayContainer := container.NewWithoutLayout(iDelayInMs)
-    iDelayInMs.Resize(fyne.NewSize(200, iDelayInMs.MinSize().Height)) // Set custom width
+    iDelayInMs.Resize(fyne.NewSize(160, iDelayInMs.MinSize().Height)) // Set custom width
+
+    iNotificationCheck := widget.NewCheck("", func(checked bool) {
+        DisplayNotification = checked
+    })
+    iNotificationCheck.SetChecked(true) // Default to checked
 
     StopWriting := false // Flag to stop writing
     bStop   := widget.NewButton("Stop", func() {
@@ -85,8 +90,11 @@ func main() {
 
     lCenter := container.NewMax(iText)
     lBottom := container.NewHBox(
-        widget.NewLabel("Delay per character (ms):"),
-        iDelayContainer,
+        widget.NewLabel("Delay (ms):"),
+        iDelayContainer, // Wrap iDelayContainer in a VBox to ensure proper alignment
+        layout.NewSpacer(),
+        widget.NewLabel("Display Notification:"),
+        iNotificationCheck,
         layout.NewSpacer(),
         bStop,
         bSubmit,
